@@ -1,0 +1,663 @@
+
+<!-- saved from url=(0066)https://www.tcscodevita.com/CodevitaV8/code_editor.jsp?problemid=B -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <link rel="stylesheet" href="./code_editor_files/code_editor.css">
+        <link rel="stylesheet" href="./code_editor_files/codemirror.css">
+        <link rel="stylesheet" href="./code_editor_files/simplescrollbars.css">
+       
+        <script src="./code_editor_files/jquery-2.0.3.js.download"></script>
+        <script src="./code_editor_files/codemirror.js.download"></script>
+        <script src="./code_editor_files/editor_main_script.js.download"></script>
+
+        <script src="./code_editor_files/simplescrollbars.js.download"></script>
+         <script src="./code_editor_files/show-hint.js.download"></script>
+        <script src="./code_editor_files/anyword-hint.js.download"></script>
+        
+        <script>
+            var problemID = 'B'; 
+            var userid = '2535093';
+            var contestEndTime = '2019-06-08 03:02:40'; 
+        </script>
+
+        <script>
+            var countdownInterval = undefined;
+
+			function counter(timeString){
+				endTime = new Date(timeString);
+				var localtime=new Date();
+				var offset=localtime.getTimezoneOffset();
+				var serveroffset=-330;
+				var difference=serveroffset-offset;    // In minutes
+				var offsetInMilliseconds=difference*60*1000;    //In Milliseconds
+				var longTime = ((endTime.getTime()+ offsetInMilliseconds)- localtime.getTime()) / 1000;
+				if(longTime >=0){
+					$('.timer #second').html( ((longTime % 60 < 10) ? "0" : "") + parseInt(longTime % 60));
+					longTime /= 60;
+					$('.timer #minute').html( ((longTime % 60 < 10) ? "0" : "") + parseInt(longTime % 60));
+					longTime /=60;
+					$('.timer #hour').html( ((longTime % 24 < 10) ? "0" : "") + parseInt(longTime % 24));
+				}
+				else{
+					$('.timer #hour').html("00");
+					$('.timer #minute').html("00");
+					$('.timer #second').html("00");
+					clearInterval(countdownInterval);
+				}
+			}
+
+            $(document).ready(()=>{
+                counter(contestEndTime);
+                countdownInterval = setInterval(()=>{
+                    counter(contestEndTime);
+                },500);
+            });
+        </script>
+        <link href="./code_editor_files/jquery.tagit.css" rel="stylesheet" type="text/css">
+        <link href="./code_editor_files/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+        <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script> -->
+		<script src="./code_editor_files/jquery-ui.min.js.download" type="text/javascript" charset="utf-8"></script>
+		<script src="./code_editor_files/tag-it.js.download" type="text/javascript" charset="utf-8"></script>
+		<!-- <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css"> -->
+		<script type="text/javascript">
+		    $(document).ready(function() {
+				var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+						//'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+						'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+						'((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+						'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+						'(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+						'(\#[-a-z\\d_]*)?$','i'); // fragment locator
+		        $("#links").tagit({
+					afterTagAdded: function addTag (event,ui){
+						//alert("HOLA"+ui.tagLabel);
+						var urlTest = pattern.test(ui.tagLabel);
+						var currTag = ui.tagLabel;
+						
+					  //alert(urlTest);
+					  if(!urlTest)
+					  {
+						alert('invalid URL:'+currTag);
+						$('#links').tagit('removeTagByLabel', currTag);
+						//jQuery.Event("keydown", { keyCode: 20 });
+					  }
+					}
+				});
+		    });
+			
+			//Below code by Mitul to disable Left Click (ultimately inspect element) and disable firebug (F12)
+			/*$(document).keydown(function(event){
+				if(event.keyCode==123){
+				alert('F12 is disabled');
+					return false;
+				}
+				else if (event.ctrlKey && event.shiftKey && event.keyCode==73){        
+					alert('This is disabled');
+					return false;
+				}
+			});
+
+			$(document).on("contextmenu",function(e){        
+			   alert('right click is disabled');
+			   e.preventDefault();
+			});*/
+		</script>
+		
+		
+		<!-- <link rel="stylesheet" href="css/code_editor/tagify.css">
+		<link rel="stylesheet" href="css/code_editor/tagifysync.css">
+		<script src="JS/code_editor/tagify.min.js"></script>
+		<script src="JS/code_editor/jQuery.tagify.min.js"></script>
+		<script data-name="textarea">
+(function(){
+var input = document.querySelector('textarea[name=tags2]'),
+    tagify = new Tagify(input, {
+        enforceWhitelist : true,
+        callbacks        : {
+            add    : console.log,  // callback when adding a tag
+            remove : console.log   // callback when removing a tag
+        }
+    });
+})()
+</script>
+ <style>
+            p{ line-height:1.4; }
+            code{ padding:2px 3px; background:lightyellow; }
+            pre code{ background:none; padding:0; }
+            .forkLink{ top:1em; right:1em; }
+
+            section > .rightSide{
+                position: sticky;
+                top: 1em;
+                align-self: start;
+            }
+
+            .tagify{
+                min-width:400px;
+                max-width:600px;
+                margin: 1.5em 0;
+            }
+
+            /* for disabling the script */
+            label{ position:fixed; bottom:10px; right:10px; cursor:pointer; font:600 .8em Arial; }
+            .disabled tags{
+                max-width:none;
+                min-width:0;
+                border:0;
+            }
+
+            .disabled tags tag,
+            .disabled tags div{ display:none !important; }
+
+            .disabled tags + input,
+            .disabled tags + textarea{ display:initial; border:1px inset; }
+
+            /* Outside of the box */
+            .tagify--outside{
+                border: 0;
+                padding: 0;
+                margin: 0;
+            }
+
+            .tagify__input--outside{
+                display: block;
+                max-width: 600px;
+                border: 1px solid #DDD;
+                margin-top: 1.5em;
+            }
+
+            /* Countries' flags */
+            .tagify__dropdown.extra-properties .tagify__dropdown__item{ color:#777; }
+            .tagify__dropdown.extra-properties .tagify__dropdown__item:hover{ color:black; background:#F1F1F1; }
+
+            .tagify__dropdown.extra-properties .tagify__dropdown__item > img{
+                display: inline-block;
+                vertical-align: middle;
+                height: 20px;
+                transform: scale(.75);
+                margin-right: 5px;
+                border-radius: 2px;
+                transition: .12s ease-out;
+            }
+
+            .tagify__dropdown.extra-properties .tagify__dropdown__item--active > img,
+            .tagify__dropdown.extra-properties .tagify__dropdown__item:hover > img{
+                transform: none;
+                margin-right: 12px;
+            }
+
+            .tagify.countries .tagify__input{ min-width:175px; }
+
+            .tagify.countries tag{ white-space:nowrap; }
+            .tagify.countries tag img{
+                display: inline-block;
+                height: 16px;
+                margin-right: 3px;
+                border-radius: 2px;
+            }
+
+            /* .tagify.readonlyMix > tag:not([readonly]) div::before{ background:#d3e2e2; } */
+
+            .tagify__input .borderd-blue > div::before{ border:2px solid #8DAFFA; }
+        </style>
+    
+ -->    <script class="resource_syntax_highlight">// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
+(function(mod) {
+  if (typeof exports == "object" && typeof module == "object") // CommonJS
+    mod(require("../../lib/codemirror"));
+  else if (typeof define == "function" && define.amd) // AMD
+    define(["../../lib/codemirror"], mod);
+  else // Plain browser env
+    mod(CodeMirror);
+})(function(CodeMirror) {
+  "use strict";
+
+  function wordRegexp(words) {
+    return new RegExp("^((" + words.join(")|(") + "))\\b");
+  }
+
+  var wordOperators = wordRegexp(["and", "or", "not", "is"]);
+  var commonKeywords = ["as", "assert", "break", "class", "continue",
+                        "def", "del", "elif", "else", "except", "finally",
+                        "for", "from", "global", "if", "import",
+                        "lambda", "pass", "raise", "return",
+                        "try", "while", "with", "yield", "in"];
+  var commonBuiltins = ["abs", "all", "any", "bin", "bool", "bytearray", "callable", "chr",
+                        "classmethod", "compile", "complex", "delattr", "dict", "dir", "divmod",
+                        "enumerate", "eval", "filter", "float", "format", "frozenset",
+                        "getattr", "globals", "hasattr", "hash", "help", "hex", "id",
+                        "input", "int", "isinstance", "issubclass", "iter", "len",
+                        "list", "locals", "map", "max", "memoryview", "min", "next",
+                        "object", "oct", "open", "ord", "pow", "property", "range",
+                        "repr", "reversed", "round", "set", "setattr", "slice",
+                        "sorted", "staticmethod", "str", "sum", "super", "tuple",
+                        "type", "vars", "zip", "__import__", "NotImplemented",
+                        "Ellipsis", "__debug__"];
+  CodeMirror.registerHelper("hintWords", "python", commonKeywords.concat(commonBuiltins));
+
+  function top(state) {
+    return state.scopes[state.scopes.length - 1];
+  }
+
+  CodeMirror.defineMode("python", function(conf, parserConf) {
+    var ERRORCLASS = "error";
+
+    var delimiters = parserConf.delimiters || parserConf.singleDelimiters || /^[\(\)\[\]\{\}@,:`=;\.\\]/;
+    //               (Backwards-compatiblity with old, cumbersome config system)
+    var operators = [parserConf.singleOperators, parserConf.doubleOperators, parserConf.doubleDelimiters, parserConf.tripleDelimiters,
+                     parserConf.operators || /^([-+*/%\/&|^]=?|[<>=]+|\/\/=?|\*\*=?|!=|[~!@])/]
+    for (var i = 0; i < operators.length; i++) if (!operators[i]) operators.splice(i--, 1)
+
+    var hangingIndent = parserConf.hangingIndent || conf.indentUnit;
+
+    var myKeywords = commonKeywords, myBuiltins = commonBuiltins;
+    if (parserConf.extra_keywords != undefined)
+      myKeywords = myKeywords.concat(parserConf.extra_keywords);
+
+    if (parserConf.extra_builtins != undefined)
+      myBuiltins = myBuiltins.concat(parserConf.extra_builtins);
+
+    var py3 = !(parserConf.version && Number(parserConf.version) < 3)
+    if (py3) {
+      // since http://legacy.python.org/dev/peps/pep-0465/ @ is also an operator
+      var identifiers = parserConf.identifiers|| /^[_A-Za-z\u00A1-\uFFFF][_A-Za-z0-9\u00A1-\uFFFF]*/;
+      myKeywords = myKeywords.concat(["nonlocal", "False", "True", "None", "async", "await"]);
+      myBuiltins = myBuiltins.concat(["ascii", "bytes", "exec", "print"]);
+      var stringPrefixes = new RegExp("^(([rbuf]|(br))?('{3}|\"{3}|['\"]))", "i");
+    } else {
+      var identifiers = parserConf.identifiers|| /^[_A-Za-z][_A-Za-z0-9]*/;
+      myKeywords = myKeywords.concat(["exec", "print"]);
+      myBuiltins = myBuiltins.concat(["apply", "basestring", "buffer", "cmp", "coerce", "execfile",
+                                      "file", "intern", "long", "raw_input", "reduce", "reload",
+                                      "unichr", "unicode", "xrange", "False", "True", "None"]);
+      var stringPrefixes = new RegExp("^(([rubf]|(ur)|(br))?('{3}|\"{3}|['\"]))", "i");
+    }
+    var keywords = wordRegexp(myKeywords);
+    var builtins = wordRegexp(myBuiltins);
+
+    // tokenizers
+    function tokenBase(stream, state) {
+      var sol = stream.sol() && state.lastToken != "\\"
+      if (sol) state.indent = stream.indentation()
+      // Handle scope changes
+      if (sol && top(state).type == "py") {
+        var scopeOffset = top(state).offset;
+        if (stream.eatSpace()) {
+          var lineOffset = stream.indentation();
+          if (lineOffset > scopeOffset)
+            pushPyScope(state);
+          else if (lineOffset < scopeOffset && dedent(stream, state) && stream.peek() != "#")
+            state.errorToken = true;
+          return null;
+        } else {
+          var style = tokenBaseInner(stream, state);
+          if (scopeOffset > 0 && dedent(stream, state))
+            style += " " + ERRORCLASS;
+          return style;
+        }
+      }
+      return tokenBaseInner(stream, state);
+    }
+
+    function tokenBaseInner(stream, state) {
+      if (stream.eatSpace()) return null;
+
+      // Handle Comments
+      if (stream.match(/^#.*/)) return "comment";
+
+      // Handle Number Literals
+      if (stream.match(/^[0-9\.]/, false)) {
+        var floatLiteral = false;
+        // Floats
+        if (stream.match(/^[\d_]*\.\d+(e[\+\-]?\d+)?/i)) { floatLiteral = true; }
+        if (stream.match(/^[\d_]+\.\d*/)) { floatLiteral = true; }
+        if (stream.match(/^\.\d+/)) { floatLiteral = true; }
+        if (floatLiteral) {
+          // Float literals may be "imaginary"
+          stream.eat(/J/i);
+          return "number";
+        }
+        // Integers
+        var intLiteral = false;
+        // Hex
+        if (stream.match(/^0x[0-9a-f_]+/i)) intLiteral = true;
+        // Binary
+        if (stream.match(/^0b[01_]+/i)) intLiteral = true;
+        // Octal
+        if (stream.match(/^0o[0-7_]+/i)) intLiteral = true;
+        // Decimal
+        if (stream.match(/^[1-9][\d_]*(e[\+\-]?[\d_]+)?/)) {
+          // Decimal literals may be "imaginary"
+          stream.eat(/J/i);
+          // TODO - Can you have imaginary longs?
+          intLiteral = true;
+        }
+        // Zero by itself with no other piece of number.
+        if (stream.match(/^0(?![\dx])/i)) intLiteral = true;
+        if (intLiteral) {
+          // Integer literals may be "long"
+          stream.eat(/L/i);
+          return "number";
+        }
+      }
+
+      // Handle Strings
+      if (stream.match(stringPrefixes)) {
+        state.tokenize = tokenStringFactory(stream.current());
+        return state.tokenize(stream, state);
+      }
+
+      for (var i = 0; i < operators.length; i++)
+        if (stream.match(operators[i])) return "operator"
+
+      if (stream.match(delimiters)) return "punctuation";
+
+      if (state.lastToken == "." && stream.match(identifiers))
+        return "property";
+
+      if (stream.match(keywords) || stream.match(wordOperators))
+        return "keyword";
+
+      if (stream.match(builtins))
+        return "builtin";
+
+      if (stream.match(/^(self|cls)\b/))
+        return "variable-2";
+
+      if (stream.match(identifiers)) {
+        if (state.lastToken == "def" || state.lastToken == "class")
+          return "def";
+        return "variable";
+      }
+
+      // Handle non-detected items
+      stream.next();
+      return ERRORCLASS;
+    }
+
+    function tokenStringFactory(delimiter) {
+      while ("rubf".indexOf(delimiter.charAt(0).toLowerCase()) >= 0)
+        delimiter = delimiter.substr(1);
+
+      var singleline = delimiter.length == 1;
+      var OUTCLASS = "string";
+
+      function tokenString(stream, state) {
+        while (!stream.eol()) {
+          stream.eatWhile(/[^'"\\]/);
+          if (stream.eat("\\")) {
+            stream.next();
+            if (singleline && stream.eol())
+              return OUTCLASS;
+          } else if (stream.match(delimiter)) {
+            state.tokenize = tokenBase;
+            return OUTCLASS;
+          } else {
+            stream.eat(/['"]/);
+          }
+        }
+        if (singleline) {
+          if (parserConf.singleLineStringErrors)
+            return ERRORCLASS;
+          else
+            state.tokenize = tokenBase;
+        }
+        return OUTCLASS;
+      }
+      tokenString.isString = true;
+      return tokenString;
+    }
+
+    function pushPyScope(state) {
+      while (top(state).type != "py") state.scopes.pop()
+      state.scopes.push({offset: top(state).offset + conf.indentUnit,
+                         type: "py",
+                         align: null})
+    }
+
+    function pushBracketScope(stream, state, type) {
+      var align = stream.match(/^([\s\[\{\(]|#.*)*$/, false) ? null : stream.column() + 1
+      state.scopes.push({offset: state.indent + hangingIndent,
+                         type: type,
+                         align: align})
+    }
+
+    function dedent(stream, state) {
+      var indented = stream.indentation();
+      while (state.scopes.length > 1 && top(state).offset > indented) {
+        if (top(state).type != "py") return true;
+        state.scopes.pop();
+      }
+      return top(state).offset != indented;
+    }
+
+    function tokenLexer(stream, state) {
+      if (stream.sol()) state.beginningOfLine = true;
+
+      var style = state.tokenize(stream, state);
+      var current = stream.current();
+
+      // Handle decorators
+      if (state.beginningOfLine && current == "@")
+        return stream.match(identifiers, false) ? "meta" : py3 ? "operator" : ERRORCLASS;
+
+      if (/\S/.test(current)) state.beginningOfLine = false;
+
+      if ((style == "variable" || style == "builtin")
+          && state.lastToken == "meta")
+        style = "meta";
+
+      // Handle scope changes.
+      if (current == "pass" || current == "return")
+        state.dedent += 1;
+
+      if (current == "lambda") state.lambda = true;
+      if (current == ":" && !state.lambda && top(state).type == "py")
+        pushPyScope(state);
+
+      var delimiter_index = current.length == 1 ? "[({".indexOf(current) : -1;
+      if (delimiter_index != -1)
+        pushBracketScope(stream, state, "])}".slice(delimiter_index, delimiter_index+1));
+
+      delimiter_index = "])}".indexOf(current);
+      if (delimiter_index != -1) {
+        if (top(state).type == current) state.indent = state.scopes.pop().offset - hangingIndent
+        else return ERRORCLASS;
+      }
+      if (state.dedent > 0 && stream.eol() && top(state).type == "py") {
+        if (state.scopes.length > 1) state.scopes.pop();
+        state.dedent -= 1;
+      }
+
+      return style;
+    }
+
+    var external = {
+      startState: function(basecolumn) {
+        return {
+          tokenize: tokenBase,
+          scopes: [{offset: basecolumn || 0, type: "py", align: null}],
+          indent: basecolumn || 0,
+          lastToken: null,
+          lambda: false,
+          dedent: 0
+        };
+      },
+
+      token: function(stream, state) {
+        var addErr = state.errorToken;
+        if (addErr) state.errorToken = false;
+        var style = tokenLexer(stream, state);
+
+        if (style && style != "comment")
+          state.lastToken = (style == "keyword" || style == "punctuation") ? stream.current() : style;
+        if (style == "punctuation") style = null;
+
+        if (stream.eol() && state.lambda)
+          state.lambda = false;
+        return addErr ? style + " " + ERRORCLASS : style;
+      },
+
+      indent: function(state, textAfter) {
+        if (state.tokenize != tokenBase)
+          return state.tokenize.isString ? CodeMirror.Pass : 0;
+
+        var scope = top(state), closing = scope.type == textAfter.charAt(0)
+        if (scope.align != null)
+          return scope.align - (closing ? 1 : 0)
+        else
+          return scope.offset - (closing ? hangingIndent : 0)
+      },
+
+      electricInput: /^\s*[\}\]\)]$/,
+      closeBrackets: {triples: "'\""},
+      lineComment: "#",
+      fold: "indent"
+    };
+    return external;
+  });
+
+  CodeMirror.defineMIME("text/x-python", "python");
+
+  var words = function(str) { return str.split(" "); };
+
+  CodeMirror.defineMIME("text/x-cython", {
+    name: "python",
+    extra_keywords: words("by cdef cimport cpdef ctypedef enum except "+
+                          "extern gil include nogil property public "+
+                          "readonly struct union DEF IF ELIF ELSE")
+  });
+
+});
+</script></head>
+    <body style="">
+    <!--  -->
+        <div class="container">
+        	
+           <div class="settings">
+                <div class="timer">
+					<span class="num" id="hour">04</span><span class="desc">Hr</span>
+					<span class="num" id="minute">25</span><span class="desc">Min</span>
+					<span class="num" id="second">02</span><span class="desc">Sec</span>
+				</div>
+           </div>
+           
+           <!-- <ul id="myTags">
+			    Existing list items will be pre-added to the tags
+			    <li>Tag1</li>
+			    <li>Tag2</li>
+			</ul> -->
+			<!-- <textarea name='tags2' placeholder='Movie names'>The Matrix, Pulp Fiction, Mad Max</textarea> -->
+           <div>
+                <div class="main-content module">
+                        <div class="settings_editor">
+                            <h1>Editor - {B}</h1>
+                            <div class="menu">
+                                <select id="prog_mode">
+                                    <option value="c">C</option>
+                                    <option value="cpp">C ++</option>
+                                    <option value="cs">C #</option>
+                                    <option value="java">Java (8)</option>
+                                    <!-- <option value="java7">Java (7)</option>-->
+                                    <!-- <option value="javascript">Javascript</option> -->
+                                    <option value="php">PHP</option>
+                                    <option value="perl">Perl</option>
+                                    <option value="python2">Python 2</option>
+                                    <option value="python3">Python 3</option>
+                                    <option value="ruby">Ruby</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="editor"><div class="CodeMirror cm-s-default CodeMirror-simplescroll CodeMirror-focused" style="width: 100%; height: 500px;"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 139px; left: 34px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;" tabindex="0"></textarea></div><div class="CodeMirror-simplescroll-horizontal" cm-not-content="true" style="display: none;"><div></div></div><div class="CodeMirror-simplescroll-vertical" cm-not-content="true" style="display: none;"><div></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 30px; margin-bottom: -17px; border-right-width: 13px; min-height: 158px; min-width: 278.563px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre>x</pre><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>10</div></div><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>9</div></div><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>10</div></div><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>9</div></div><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>10</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors" style="visibility: hidden;"><div class="CodeMirror-cursor" style="left: 4px; top: 135px; height: 15px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation" style=""><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">m</span><span class="cm-operator">=</span><span class="cm-builtin">int</span>(<span class="cm-builtin">input</span>(<span class="cm-string">"enter a number"</span>)</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">n</span><span class="cm-operator">=</span><span class="cm-builtin">int</span>(<span class="cm-builtin">input</span>(<span class="cm-string">"enter a number"</span>)</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">if</span>(<span class="cm-variable">m</span><span class="cm-operator">==</span><span class="cm-variable">n</span>):</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">      <span class="cm-builtin">print</span>(<span class="cm-string">"converged number is :"</span>,<span class="cm-variable">m</span>)</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">while</span>(<span class="cm-variable">m</span><span class="cm-operator">!=</span><span class="cm-variable">n</span>):</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">6</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">      <span class="cm-variable">m</span><span class="cm-operator">=</span><span class="cm-variable">m</span><span class="cm-operator">*</span><span class="cm-number">2</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">7</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">      <span class="cm-variable">n</span><span class="cm-operator">=</span><span class="cm-variable">n</span><span class="cm-operator">*</span><span class="cm-number">2</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">8</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">else</span>:</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">9</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">     <span class="cm-builtin">print</span>(<span class="cm-string">"converged number is:"</span>,<span class="cm-variable">n</span>)</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -30px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">10</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">&#8203;</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 13px; width: 1px; border-bottom: 0px solid transparent; top: 158px;"></div><div class="CodeMirror-gutters" style="height: 171px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div></div></div></div></div>
+                        <div class="pre-submission-container">
+                            <div class="file-name-settings">
+                                <div class="form-group">
+                                    <input type="text" id="prg_name">
+                                    <label for="prg_name">Program Name</label>
+                                </div>
+                                <span>.</span>
+                                <div class="form-group">
+                                    <input type="text" id="ext" readonly="readonly">
+                                    <label for="ext">Extension</label>
+                                </div>
+                            </div>
+                            <div class="action-buttons-section">
+                                <button class="button" id="save" onclick="save()" disabled="disabled">Save (Local)</button>
+                                <button class="button" id="compile" onclick="compile()" disabled="disabled">Compile &amp; Run</button>
+                            </div>
+                            <div class="attribution_section_container disabled" style="margin-top: 5px; grid-column: span 1; padding: 5px 0 10px 0">
+                                <div class="attribution_section" style="grid-column: span 2; padding: 5px 0 10px 0">
+                                    <input type="checkbox" id="attributions">
+                                    <label for="attributions">Took help from online sources (attributions)</label>			
+                                </div>
+                                <div class="attribution_section text">
+                                    <label>Links (Copy paste / Drag-Drop from source window): </label>
+                                    <!-- <textarea id="links"></textarea> -->
+                                    <ul id="links" class="tagit ui-widget ui-widget-content ui-corner-all"><li class="tagit-new"><input type="text" class="ui-widget-content ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></li></ul>
+                                </div>
+                                <div class="attribution_section text">
+                                    <label>Comments : </label>
+                                    <textarea id="comments"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-sub-result-details" style="display: none"></div>
+                        <div class="hidden-loader">
+                            <div class="loader-1">
+                                <div class="clock"></div>
+                                <span class="text">Compiling ...</span>
+                            </div>
+                        </div>
+                        <div class="hidden-pre-sub-content">
+                            <div class="file-name-settings">
+                                <div class="form-group">
+                                    <input type="text" id="prg_name">
+                                    <label for="prg_name">Program Name</label>
+                                </div>
+                                <span>.</span>
+                                <div class="form-group">
+                                    <input type="text" id="ext" readonly="readonly">
+                                    <label for="ext">Extension</label>
+                                </div>
+                            </div>
+                            <div class="action-buttons-section">
+                                <button class="button" id="save" onclick="save()">Save (Local)</button>
+                                <button class="button" id="compile" onclick="compile()">Compile &amp; Run</button>
+                            </div>
+                            <div class="attribution_section_container disabled" style="margin-top: 5px; grid-column: span 1; padding: 5px 0 10px 0">
+                                <div class="attribution_section" style="grid-column: span 2; padding: 5px 0 10px 0">
+                                    <input type="checkbox" id="attributions">
+                                    <label for="attributions">Took help from online sources (attributions)</label>			
+                                </div>
+                                <div class="attribution_section text">
+                                    <label>Links (Copy paste / Drag-Drop from source window): </label>
+                                    <!-- <textarea id="links"></textarea> -->
+                                    <ul id="links"></ul>
+                                </div>
+                                <div class="attribution_section text">
+                                    <label>Comments : </label>
+                                    <textarea id="comments"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hidden-post-submission-summary" style="display: none">
+                            <div class="submission_notification success">
+                                <div class="graphic"><img src="./code_editor_files/happy.svg"><div class="short-msg"></div></div>
+                                <div class="info">
+                                    <h2></h2>
+                                    <div class="actions">
+                                        <div class="other-info"></div>
+                                        <div class="buttons"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                   </div>
+           </div>
+        	<ul id="myTags"></ul>
+        </div>
+    
+<ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all tagit-autocomplete" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 1; top: 0px; left: 0px; display: none;"></ul></body></html>

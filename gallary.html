@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gallery</title>
+	<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<style type="text/css">
+		title {
+			  text-align: center;
+			  color: #333;
+			  font-size: 1.6em;
+			}
+			.creds {
+			  text-align: center;
+			  color: #666;
+			  font-size: 0.85em;
+			}
+			.creds a {
+			  color: #000;
+			  text-decoration: none;
+			  border-bottom: 1px dotted #000;
+			}
+			.flip-menu{
+			margin: 40px;
+			}
+			.flip-item-wrap{
+			width: 25%;
+		    height: auto;
+		    float: left;
+			position:relative;
+			-webkit-perspective:800px;
+			   -moz-perspective:800px;
+			    -ms-perspective:800px;
+			     -o-perspective:800px;
+			        perspective:800px;
+			}
+			@media screen and (min-width: 1280px) {
+				.flip-item-wrap{
+				width: 21.6%;
+				margin-left: inherit
+				}
+			}
+			@media screen and (max-width: 979px) {
+				.flip-item-wrap{
+				width: 36.3%;
+				margin-left: inherit
+				}
+			}
+			@media screen and (max-width: 639px) {
+				.flip-item-wrap{
+				width: 53%;
+				margin-left: inherit
+				}
+			}
+			@media screen and (max-width: 379px) {
+				.flip-item-wrap{
+				width: 100%;
+				margin-left: inherit
+				}
+			}
+			.flip-item-wrap img{
+			width:100%;
+			height:auto;
+			display:block;
+			margin:10px;
+			}
+			.flip-item-wrap input{
+			display: none;
+			}
+			.flip-item-wrap .fake-image{
+			visibility: hidden;
+			}
+			.flip-item{
+			display: block;
+			width:100%;
+			height:100%;
+			float:left;
+			position:absolute;
+			top:0;
+			left:0;
+			cursor:pointer;
+			color:#fff;
+			-webkit-transform-style:preserve-3d;
+			   -moz-transform-style:preserve-3d;
+			    -ms-transform-style:preserve-3d;
+			     -o-transform-style:preserve-3d;
+			        transform-style:preserve-3d;
+			-webkit-transition:-webkit-transform 1s;
+			   -moz-transition:   -moz-transform 1s;
+			     -o-transition:     -o-transform 1s;
+			        transition:        transform 1s;
+			}
+			.flip-item figure{
+			display:block;
+			position:absolute;
+			width:100%;
+			height:100%;
+			margin:0;
+			-webkit-backface-visibility:hidden;
+			   -moz-backface-visibility:hidden;
+			    -ms-backface-visibility:hidden;
+			     -o-backface-visibility:hidden;
+			        backface-visibility:hidden;
+			}
+			.flip-item .back{
+			width:100%;
+			display:block;
+			margin:0;
+			-webkit-transform:rotateY( 180deg );
+			   -moz-transform:rotateY( 180deg );
+			    -ms-transform:rotateY( 180deg );
+			     -o-transform:rotateY( 180deg );
+			        transform:rotateY( 180deg );
+			}
+			.flipper:checked + .flip-item{
+			-webkit-transform:rotateY( 180deg );
+			   -moz-transform:rotateY( 180deg );
+			    -ms-transform:rotateY( 180deg );
+			     -o-transform:rotateY( 180deg );
+			        transform:rotateY( 180deg );
+			}
+			.flip-item-desc{
+			background: rgba(0,0,0,0.2);
+			width:90%;
+			height:90%;
+			padding:5%;
+			position:absolute;
+			top: 0;
+			left: 0;
+			text-shadow:1px 2px 1px rgba(0,0,0,0.9);
+			overflow:hidden;
+			}
+			.flip-item-title{
+			font-size: 1.5em;
+			margin: 1em 0 0.8em;
+			}
+			.body { style="background-colorgcolor:red; }
+	</style>
+	<script type="text/javascript">
+		$(function () {
+			$("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
+		});
+	</script>
+</head>
+<body>
+	<h1 class="title">Gallery</h1><hr>
+		<div class="flip-menu">
+			<section class="flip-item-wrap">
+				<img  class="fake-image" src="images/Dosa.jpg" alt="" /><!-- this image will add height to parent element -->
+				<input type="checkbox" class="flipper" id="a" />
+				<label for="a" class="flip-item">
+					<figure class="front"><img src="images/Dosa.jpg" alt=""></img></figure>
+				    <figure class="back">
+				    	<img src="images/Dosa.jpg" alt=""></img>
+				    	<div class="flip-item-desc">
+				    		<h4 class="flip-item-title"><a href="onionDosa.php" style="text-decoration:none;color:white;" >Onion rava Dosa</a></h4>
+				    		<p>Rava dosa is another popular South Indian Dosa dish.</p>
+				    	</div>
+				    </figure>
+				</label>
+			</section>
+			<section class="flip-item-wrap">
+				<img class="fake-image" src="images/fish.jpg" alt="" /><!-- this image will add height to parent element -->
+				<input type="checkbox" class="flipper" id="e">
+				<label for="e" class="flip-item">
+				    <figure class="front"><img src="images/fish.jpg" alt=""></img></figure>
+				    <figure class="back">
+				    	<img src="images/fish.jpg" alt=""></img>
+				    	<div class="flip-item-desc">
+				    		<h4 class="flip-item-title"><a href="fish.php" style="text-decoration:none;color:white;" >Fish gassi</a></h4>
+				    		<p>A Manglorean classic this delicious fish curry is ideal for anyone who loves seafood, spice and creamy coconut milk.</p>
+				    	</div>
+				    </figure>
+				</label>
+			</section><section class="flip-item-wrap">
+				<img class="fake-image" src="images/upma.jpg" alt=""><!-- this image will add height to parent element -->
+				<input type="checkbox" class="flipper" id="c">
+				<label for="c" class="flip-item">
+				    <figure class="front"><img src="images/upma.jpg" alt=""></img></figure>
+				    <figure class="back">
+				    	<img src="images/upma.jpg" alt=""></img>
+				    	<div class="flip-item-desc">
+				    		<h4 class="flip-item-title"><a href="upma.php" style="text-decoration:none;color:white;" >Upma</a></h4>
+				    		<p>Upma is a traditional south indian breakfast made of rava.</p>
+				    	</div>
+				    </figure>
+				</label>
+			</section><section class="flip-item-wrap">
+				<img class="fake-image" src="images/ragidosa.jpg" alt=""><!-- this image will add height to parent element -->
+				<input type="checkbox" class="flipper" id="d">
+				<label for="d" class="flip-item">
+				    <figure class="front"><img src="images/ragidosa.jpg" alt=""></img></figure>
+				    <figure class="back">
+				    	<img src="images/ragidosa.jpg" alt=""></img>
+				    	<div class="flip-item-desc">
+				    		<h4 class="flip-item-title"><a href="ragidosa.php" style="text-decoration:none;color:white;" >Ragi Dosa</a></h4>
+				    		<p> This one here is a healthy alternative to the usual dosas with a combination of ragi and rice flour. </p>
+				    	</div>
+				    </figure>
+				</label>
+			</section><section class="flip-item-wrap">
+				<img class="fake-image" src="images/malabar.jpg" alt=""><!-- this image will add height to parent element -->
+				<input type="checkbox" class="flipper" id="g">
+				<label for="g" class="flip-item">
+				    <figure class="front"><img src="images/malabar.jpg" alt=""></img></figure>
+				    <figure class="back">
+				    	<img src="images/malabar.jpg" alt=""></img>
+				    	<div class="flip-item-desc">
+				    		<h4 class="flip-item-title"><a href="malabar.php" style="text-decoration:none;color:white;" >Malabar Fish Biriyani</a></h4>
+				    		<p>In Malabar this dish is made with "kaima rice" a short grain mildly flavored rice. </p>
+				    	</div>
+				    </figure>
+				</label>
+			</section><section class="flip-item-wrap">
+				<img class="fake-image" src="images/tamarind.jpg" alt=""><!-- this image will add height to parent element -->
+				<input type="checkbox" class="flipper" id="h">
+				<label for="h" class="flip-item">
+				    <figure class="front"><img src="images/tamarind.jpg" alt=""></img></figure>
+				    <figure class="back">
+				    	<img src="images/tamarind.jpg" alt=""></img>
+				    	<div class="flip-item-desc">
+				    		<h4 class="flip-item-title"><a href="tamrind.php" style="text-decoration:none;color:white;" >Tamarind Rice</a></h4>
+				    		<p>A tangy rice dish made with channa and urad dal, infused with the flavour of tamarind pulp. You can enjoy it with papad and pickle on the side.</p>
+				    	</div>
+				    </figure>
+				</label>
+			</section><section class="flip-item-wrap">
+				<img class="fake-image" src="images/ghee.jpg" alt=""><!-- this image will add height to parent element -->
+				<input type="checkbox" class="flipper" id="f">
+				<label for="f" class="flip-item">
+				    <figure class="front"><img src="images/ghee.jpg" alt=""></img></figure>
+				    <figure class="back">
+				    	<img src="images/ghee.jpg" alt=""></img>
+				    	<div class="flip-item-desc">
+				    		<h4 class="flip-item-title"><a href="ghee.php" style="text-decoration:none;color:white;"> Ghee Rice</a></h4>
+				    		<p>It is a delicious and simple rice which is perfect for packed lunches and picnics.</p>
+				    	</div>
+				    </figure>
+				</label>
+			</section><section class="flip-item-wrap">
+				<img class="fake-image" src="images/AlooGobiMasala1.jpg" alt=""><!-- this image will add height to parent element -->
+				<input type="checkbox" class="flipper" id="j">
+				<label for="j" class="flip-item">
+				    <figure class="front"><img src="images/AlooGobiMasala1.jpg" alt=""></img></figure>
+				    <figure class="back">
+				    	<img src="images/AlooGobiMasala1.jpg" alt=""></img>
+				    	<div class="flip-item-desc">
+				    		<h4 class="flip-item-title"><a href="AlooGobiMasala.php" style="text-decoration:none;color:white;" >Aloo Gobi Masala</a></h4>
+				    		<p>This is a traditional Indian cauliflower and potato curry recipe.</p>
+				    	</div>
+				    </figure>
+				</label>
+			</section>
+			<section class="flip-item-wrap">
+				<img class="fake-image" src="images/eggcurry.jpg" alt="" /><!-- this image will add height to parent element -->
+				<input type="checkbox" class="flipper" id="z" />
+				<label for="z" class="flip-item">
+				    <figure class="front"><img src="images/eggcurry.jpg" alt=""></img></figure>
+				    <figure class="back">
+				    	<img src="images/eggcurry.jpg" alt=""></img>
+				    	<div class="flip-item-desc">
+				    		<h4 class="flip-item-title"><a href="eggcurry.php" style="text-decoration:none;color:white;" >Egg Currry</a></h4>
+				    		<p>Egg curry is the most alluring way of presenting multitalented eggs.</p>
+				    	</div>
+				    </figure>
+				</label>
+			</section>
+
+			<section class="flip-item-wrap">
+				<img  class="fake-image" src="images/oniondosa.jpg" alt=""><!-- this image will add height to parent element -->
+				<input type="checkbox" class="flipper" id="l">
+				<label for="l" class="flip-item">
+					<figure class="front"><img src="images/oniondosa.jpg" alt=""></img></figure>
+				    <figure class="back">
+				    	<img src="images/oniondosa.jpg" alt=""></img>
+				    	<div class="flip-item-desc">
+				    		<h4 class="flip-item-title"><a href="onionDosa.php" style="text-decoration:none;color:white;" >Onion rava Dosa</a></h4>
+				    		<p>Rava dosa is another popular South Indian Dosa dish.</p>
+				    	</div>
+				    </figure>
+				</label>
+			</section>	
+			<section class="flip-item-wrap">
+				<img class="fake-image" src="images/chanakulcha.jpg" alt=""><!-- this image will add height to parent element -->
+				<input type="checkbox" class="flipper" id="fd">
+				<label for="fd" class="flip-item">
+				    <figure class="front"><img src="images/chanakulcha.jpg" alt=""></img></figure>
+				    <figure class="back">
+				    	<img src="images/chanakulcha.jpg" alt=""></img>
+				    	<div class="flip-item-desc">
+				    		<h4 class="flip-item-title"><a href="chanakulcha.php" style="text-decoration:none;color:white;"> chana Kulcha</a></h4>
+				    		<p>North Indian cuisine includes a number of lentils of pulses, one of which is the chickpea.</p>
+				    	</div>
+				    </figure>
+				</label>
+			</section>
+			<section class="flip-item-wrap">
+				<img class="fake-image" src="images/KadaiPaneer1.jpg" alt=""><!-- this image will add height to parent element -->
+				<input type="checkbox" class="flipper" id="fds">
+				<label for="fds" class="flip-item">
+				    <figure class="front"><img src="images/KadaiPaneer1.jpg" alt=""></img></figure>
+				    <figure class="back">
+				    	<img src="images/KadaiPaneer1.jpg" alt=""></img>
+				    	<div class="flip-item-desc">
+				    		<h4 class="flip-item-title"><a href="KadaiPaneer.php" style="text-decoration:none;color:white;">Kadai Paneer</a></h4>
+				    		<p>Kadai Paneer is a popular paneer recipe where paneer and bell peppers are cooked in a spicy masala.</p>
+				    	</div>
+				    </figure>
+				</label>
+			</section>
+			<section class="flip-item-wrap">
+				<img class="fake-image" src="images/makhnipaneerbiriyani.jpg" alt=""><!-- this image will add height to parent element -->
+				<input type="checkbox" class="flipper" id="ffs">
+				<label for="ffs" class="flip-item">
+				    <figure class="front"><img src="images/makhnipaneerbiriyani.jpg" alt=""></img></figure>
+				    <figure class="back">
+				    	<img src="images/makhnipaneerbiriyani.jpg" alt=""></img>
+				    	<div class="flip-item-desc">
+				    		<h4 class="flip-item-title"><a href="makhnipaneerbiriyani.php" style="text-decoration:none;color:white;">Makhni Paneer Biriyani</a></h4>
+				    		<p>Paneer Malai Makhani Biryani recipe is so delicious and easy to make and you can make it at anytime of the day either for your guests or for your whole family.
+
+</p>
+				    	</div>
+				    </figure>
+				</label>
+			</section>
+			<section class="flip-item-wrap">
+				<img class="fake-image" src="images/masalabhindi.jpg" alt=""><!-- this image will add height to parent element -->
+				<input type="checkbox" class="flipper" id="fes">
+				<label for="fes" class="flip-item">
+				    <figure class="front"><img src="images/masalabhindi.jpg" alt=""></img></figure>
+				    <figure class="back">
+				    	<img src="images/masalabhindi.jpg" alt=""></img>
+				    	<div class="flip-item-desc">
+				    		<h4 class="flip-item-title"><a href="masalabhindi.php" style="text-decoration:none;color:white;">masalabhindi</a></h4>
+				    		<p>Bhindi Masala is a popular Indian dish made with okra, onion, tomatoes & spices! This stir fry is best enjoyed with warm rotis.
+
+</p>
+				    	</div>
+				    </figure>
+				</label>
+			</section>
+			<section class="flip-item-wrap">
+				<img class="fake-image" src="images/vegetarianburritos.jpg" alt=""><!-- this image will add height to parent element -->
+				<input type="checkbox" class="flipper" id="fas">
+				<label for="fas" class="flip-item">
+				    <figure class="front"><img src="images/vegetarianburritos.jpg" alt=""></img></figure>
+				    <figure class="back">
+				    	<img src="images/vegetarianburritos.jpg" alt=""></img>
+				    	<div class="flip-item-desc">
+				    		<h4 class="flip-item-title"><a href="vegetarianburritos.php" style="text-decoration:none;color:white;">vegetarianburritos</a></h4>
+				    		<p>This is a quick and easy basic recipe for a vegetarian and vegan bean burrito.</p>
+				    	</div>
+				    </figure>
+				</label>
+			</section>
+			<section class="flip-item-wrap">
+				<img class="fake-image" src="images/ragidosa.jpg" alt=""><!-- this image will add height to parent element -->
+				<input type="checkbox" class="flipper" id="fos">
+				<label for="fos" class="flip-item">
+				    <figure class="front"><img src="images/ragidosa.jpg" alt=""></img></figure>
+				    <figure class="back">
+				    	<img src="images/ragidosa.jpg" alt=""></img>
+				    	<div class="flip-item-desc">
+				    		<h4 class="flip-item-title"><a href="ragidosa.php" style="text-decoration:none;color:white;">Ragi Dosa</a></h4>
+				    		<p>Dosa is a comfort food and loved by most individuals. This one here is a healthy alternative to the usual dosas with a combination of two flours, including ragi and rice flour. </p>
+				    	</div>
+				    </figure>
+				</label>
+			</section>
+		</div>
+	</body>
+</html>                                                                                    
